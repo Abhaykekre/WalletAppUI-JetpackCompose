@@ -1,7 +1,6 @@
 package com.example.walletappuijetpackcompose
 
 import android.os.Bundle
-import android.widget.Space
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -19,12 +18,15 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.dp
 import com.example.walletappuijetpackcompose.ui.ActionSection
 import com.example.walletappuijetpackcompose.ui.CardSection
+import com.example.walletappuijetpackcompose.ui.SpendingSection
 import com.example.walletappuijetpackcompose.ui.TopBar
 import com.example.walletappuijetpackcompose.ui.theme.WalletAppUIJetpackComposeTheme
+import kotlin.random.Random
 
 class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
@@ -63,16 +65,31 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun MainScreen(modifier: Modifier = Modifier) {
-          Column(
-              modifier = Modifier.verticalScroll(rememberScrollState())
-          ) {
-              Spacer(modifier = Modifier.height(30.dp))
-              CardSection(
-                  modifier = Modifier.fillMaxWidth()
-              )
-              Spacer(modifier =Modifier.height(20.dp))
-              ActionSection(modifier = Modifier.fillMaxWidth())
-          }
+        Column(
+            modifier = Modifier.verticalScroll(rememberScrollState())
+        ) {
+            Spacer(modifier = Modifier.height(30.dp))
+            CardSection(
+                modifier = Modifier.fillMaxWidth()
+            )
+            Spacer(modifier = Modifier.height(20.dp))
+            ActionSection(modifier = Modifier.fillMaxWidth())
+            Spacer(modifier = Modifier.height(40.dp))
+
+            SpendingSection(modifier = Modifier.fillMaxWidth())
+            Spacer(modifier = Modifier.height(40.dp))
+
+            // SpendingGraph(modifier = Modifier..Modifier.fillMaxWidth().height(200.dp))
+            Spacer(modifier = Modifier.height(100.dp))
+        }
     }
 }
 
+
+fun randomColor(minBrightness: Int = 80): androidx.compose.ui.graphics.Color {
+    val random = Random.Default
+    val red = random.nextInt(minBrightness, 256)
+    val green = random.nextInt(minBrightness, 256)
+    val blue = random.nextInt(minBrightness, 256)
+    return Color(red, green, blue)
+}
